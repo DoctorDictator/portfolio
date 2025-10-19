@@ -47,7 +47,7 @@ export default async function BlogDetailPage({ params }: PageProps) {
         />
 
         <div className="mt-8">
-          <BlogPage public_id={blog.image_public_id} />
+          <BlogPage url={blog.image_public_id} />
         </div>
 
         <div className="prose lg:prose-xl dark:prose-dark mt-7">

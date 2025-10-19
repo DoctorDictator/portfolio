@@ -3,15 +3,8 @@
 import Title from "@/components/ui/Title";
 import Link from "next/link";
 import GitHubCalendar from "react-github-calendar";
-import { useMemo } from "react";
 
 export default function CodingPlatforms() {
-  // Limit to the latest full year (52 weeks)
-  const until = useMemo(
-    () => new Date().toISOString().slice(0, 10), // YYYY-MM-DD
-    []
-  );
-
   return (
     <div className="w-2/3 max-lg:w-full max-sm:w-full flex flex-col items-center mt-4 pb-8 gap-12">
       {/* GitHub Contributions */}
@@ -40,7 +33,6 @@ export default function CodingPlatforms() {
             >
               <GitHubCalendar
                 username="DoctorDictator"
-                until={until} // ensures Oct→Oct coverage
                 blockSize={10}
                 blockMargin={3}
                 fontSize={12}

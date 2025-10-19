@@ -2,12 +2,11 @@
 
 import { Blog } from "@/types/project";
 import HomeRouteBlogCards from "./HomeRouteBlogCards";
-import { useEffect, useState } from "react";
-import { memo } from "react";
+import { useEffect, useState, memo } from "react";
 import Title from "./ui/Title";
 
 function HomeRouteBlogs() {
-  const [blogs, setBogs] = useState<Blog[]>([]);
+  const [blogs, setBlogs] = useState<Blog[]>([]);
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -16,13 +15,13 @@ function HomeRouteBlogs() {
         const data = await response.json();
 
         if (data.success && Array.isArray(data.data)) {
-          setBogs(data.data);
+          setBlogs(data.data);
         } else {
-          setBogs([]);
+          setBlogs([]);
         }
       } catch (error) {
         console.error(`Error while fetching the blogs: ${error}`);
-        setBogs([]);
+        setBlogs([]);
       }
     };
 

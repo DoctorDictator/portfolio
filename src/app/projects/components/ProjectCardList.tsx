@@ -54,44 +54,63 @@ export default ProjectCardList;
 
 const data: Project[] = [
   {
-    logo: "/note-taking-app.png",
-    title: "Note-Taking App",
+    logo: "/mentorlink-logo.png",
+    title: "MentorLink",
     description:
-      "A full-featured note-taking application built with a relational backend, with CRUD, categories, search, and user auth.",
+      "A modern web platform revolutionizing academic mentorship management for Manipal University Jaipur. It streamlines mentor–mentee pairing, meeting scheduling, progress tracking, and real-time collaboration with a focus on accessibility and data-driven insights.",
     techStack: [
-      "Node.js",
-      "Express",
+      "Next.js 13+",
+      "JavaScript",
       "TypeScript",
-      "PostgreSQL",
-      "Prisma",
-      "React",
       "Tailwind CSS",
+      "Framer Motion",
+      "MongoDB",
+      "Mongoose",
+      "JWT",
     ],
-    link: "", // add your deployed URL if you have one
-    source: "https://github.com/DoctorDictator/note-taking-app",
+    link: "https://mentorlink-nu.vercel.app/",
+    source: "https://github.com/SDC-MUJ/mentor-mentee",
   },
   {
     logo: "/it-ticketing-system.png",
     title: "IT Ticketing System",
     description:
-      "Role-based IT ticketing platform with admin, worker & user dashboards, ticket lifecycle, SLAs, and metrics.",
+      "An enterprise-grade helpdesk solution built for Manipal University Jaipur to streamline IT service requests. It features role-based dashboards (Admin, Supervisor, User), ticket lifecycle management, OTP-based authentication, email verification, and Microsoft SSO integration.",
     techStack: [
-      "Next.js",
+      "Next.js 13+",
+      "TypeScript",
+      "MongoDB",
+      "Prisma",
+      "NextAuth.js",
+      "Tailwind CSS",
+      "Heroicons",
+    ],
+    link: "https://helpdesk-mocha.vercel.app/",
+    source: "https://github.com/DoctorDictator/it-ticketing-system",
+  },
+  {
+    logo: "/note-taking-app.png",
+    title: "Note-Taking App",
+    description:
+      "A full-featured note-taking application built with a relational backend, supporting CRUD operations, categories, search, and user authentication with a clean UI.",
+    techStack: [
+      "Next.js 13+",
       "TypeScript",
       "Prisma",
       "PostgreSQL",
       "Tailwind CSS",
+      "React",
     ],
-    link: "", // add your deployed URL if available
-    source: "https://github.com/DoctorDictator/it-ticketing-system",
+    link: "",
+    source: "https://github.com/DoctorDictator/rdbbms-project-2025",
   },
   {
     logo: "/canva.svg",
     title: "Canva Clone / Editor App",
     description:
-      "A canvas / design editor app that mimics Canva’s block & layer editing functionality.",
+      "A web-based design editor inspired by Canva, supporting block and layer editing, asset manipulation, and export functionalities with a dynamic canvas rendering system.",
     techStack: [
-      "React",
+      "Next.js 13+",
       "TypeScript",
       "Canvas API / Konva / Fabric.js",
       "Tailwind CSS",
@@ -100,16 +119,34 @@ const data: Project[] = [
       "Prisma",
       "PostgreSQL",
     ],
-    link: "", // add your live link if deployed
+    link: "https://neocanva.vercel.app",
     source: "https://github.com/DoctorDictator/Canva",
   },
   {
     logo: "/pathfinding-visualizer.png",
     title: "Pathfinding Visualizer",
     description:
-      "Visualize algorithms like A*, Dijkstra, BFS, DFS on grids with walls, weights, and live animations.",
+      "An interactive visualization tool demonstrating graph traversal algorithms such as A*, Dijkstra, BFS, and DFS on dynamic grids with weighted nodes and walls.",
     techStack: ["React", "TypeScript", "Tailwind CSS"],
-    link: "", // add deployed link, e.g. Vercel/GitHub Pages
+    link: "https://doctordictator.github.io/Pathfinding-Visualizer/",
     source: "https://github.com/DoctorDictator/Pathfinding-Visualizer",
+  },
+  {
+    logo: "/web-wallet.png",
+    title: "Web Wallet",
+    description:
+      "A decentralized multi-chain wallet for Solana and Ethereum built with React and TypeScript. It features mnemonic generation, secure key derivation, and an interactive UI for managing wallets — built as a blockchain learning project.",
+    techStack: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "bip39",
+      "@solana/web3.js",
+      "tweetnacl",
+      "ethers.js",
+      "React Icons",
+    ],
+    link: "https://web-wallet-wheat.vercel.app",
+    source: "https://github.com/DoctorDictator/web-wallet",
   },
 ];

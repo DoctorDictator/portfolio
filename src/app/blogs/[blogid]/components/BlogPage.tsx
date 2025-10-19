@@ -1,23 +1,22 @@
-'use client';
+"use client";
 
-import { CldImage } from 'next-cloudinary'
-import React from 'react'
+import Image from "next/image";
+import React from "react";
 
-type PublicId = {
-    public_id: string
-}
+type ImageUrl = {
+  url: string;
+};
 
-const BlogPage = ({ public_id }: PublicId) => {
-    return (
-        <CldImage
-            width="900"
-            height="900"
-            src={public_id}
-            sizes="100vw"
-            alt="Blog Image"
-            radius="10"
-        />
-    )
-}
+const BlogPage = ({ url }: ImageUrl) => {
+  return (
+    <Image
+      width={900}
+      height={900}
+      src={url}
+      alt="Blog Image"
+      style={{ borderRadius: 10, width: "100%", height: "auto" }}
+    />
+  );
+};
 
-export default BlogPage
+export default BlogPage;
