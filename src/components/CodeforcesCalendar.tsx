@@ -1,15 +1,19 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useDarkMode } from "@/hooks/useDarkMode";
 
 interface CodeforcesCalendarProps {
   username: string;
 }
-
 interface ContestData {
   date: string;
   count: number;
+}
+interface CodeforcesSubmission {
+  creationTimeSeconds: number;
+  verdict?: string;
+  problem: { name: string; rating?: number };
 }
 
 export default function CodeforcesCalendar({
@@ -19,88 +23,66 @@ export default function CodeforcesCalendar({
   const [loading, setLoading] = useState(true);
   const { isDarkMode } = useDarkMode();
 
-  useEffect(() => {
-    fetchCodeforcesData();
-  }, [username]);
+  const generateEmptyData = useCallback((): ContestData[] => {
+    const out: ContestData[] = [];
+    const today = new Date();
+    for (let i = 364; i >= 0; i--) {
+      const d = new Date(today);
+      d.setDate(d.getDate() - i);
+      out.push({ date: d.toISOString().split("T")[0], count: 0 });
+    }
+    return out;
+  }, []);
 
-  const fetchCodeforcesData = async () => {
+  const processSubmissions = useCallback(
+    (submissions: CodeforcesSubmission[]): ContestData[] => {
+      const dailyData: Record<string, number> = {};
+      submissions.forEach((s) => {
+        const date = new Date(s.creationTimeSeconds * 1000)
+          .toISOString()
+          .split("T")[0];
+        dailyData[date] = (dailyData[date] ?? 0) + 1;
+      });
+
+      const out: ContestData[] = [];
+      const today = new Date();
+      for (let i = 364; i >= 0; i--) {
+        const d = new Date(today);
+        d.setDate(d.getDate() - i);
+        const ds = d.toISOString().split("T")[0];
+        out.push({ date: ds, count: dailyData[ds] ?? 0 });
+      }
+      return out;
+    },
+    []
+  );
+
+  const fetchCodeforcesData = useCallback(async () => {
+    setLoading(true);
     try {
-      // Fetch user submissions from Codeforces API
       const response = await fetch(
         `https://codeforces.com/api/user.status?handle=${username}&from=1&count=10000`
       );
       const result = await response.json();
-
       if (result.status === "OK") {
-        const submissions = processSubmissions(result.result);
+        const submissions = processSubmissions(
+          result.result as CodeforcesSubmission[]
+        );
         setData(submissions);
       } else {
         throw new Error(`Codeforces API error: ${result.comment}`);
       }
-    } catch (error) {
-      console.error("Failed to fetch Codeforces data:", error);
-      // Generate empty data instead of mock data
+    } catch (err) {
+      console.error("Failed to fetch Codeforces data:", err);
       setData(generateEmptyData());
     } finally {
       setLoading(false);
     }
-  };
+  }, [username, processSubmissions, generateEmptyData]);
 
-  interface CodeforcesSubmission {
-    creationTimeSeconds: number;
-    verdict?: string;
-    problem: {
-      name: string;
-      rating?: number;
-    };
-  }
-
-  const processSubmissions = (
-    submissions: CodeforcesSubmission[]
-  ): ContestData[] => {
-    const dailyData: { [date: string]: number } = {};
-
-    // Count submissions per day
-    submissions.forEach((submission) => {
-      const date = new Date(submission.creationTimeSeconds * 1000)
-        .toISOString()
-        .split("T")[0];
-      dailyData[date] = (dailyData[date] || 0) + 1;
-    });
-
-    const data: ContestData[] = [];
-    const today = new Date();
-
-    // Generate calendar data for the past year
-    for (let i = 364; i >= 0; i--) {
-      const date = new Date(today);
-      date.setDate(date.getDate() - i);
-      const dateStr = date.toISOString().split("T")[0];
-
-      data.push({
-        date: dateStr,
-        count: dailyData[dateStr] || 0,
-      });
-    }
-
-    return data;
-  };
-
-  const generateEmptyData = (): ContestData[] => {
-    const data: ContestData[] = [];
-    const today = new Date();
-
-    for (let i = 364; i >= 0; i--) {
-      const date = new Date(today);
-      date.setDate(date.getDate() - i);
-
-      data.push({
-        date: date.toISOString().split("T")[0],
-        count: 0,
-      });
-    }
-    return data;
-  };
+  useEffect(() => {
+    fetchCodeforcesData();
+  }, [fetchCodeforcesData]);
 
   const getIntensityLevel = (count: number): number => {
     if (count === 0) return 0;
@@ -115,44 +97,34 @@ export default function CodeforcesCalendar({
       light: ["#ebedf0", "#1976d2", "#1565c0", "#0d47a1", "#0a369d"],
       dark: ["#161b22", "#1976d2", "#1565c0", "#0d47a1", "#0a369d"],
     };
-
     return isDarkMode ? colors.dark[level] : colors.light[level];
   };
 
   const renderWeeks = () => {
     const weeks: JSX.Element[] = [];
     const weeksCount = Math.ceil(data.length / 7);
-
     for (let week = 0; week < weeksCount; week++) {
       const days: JSX.Element[] = [];
-
       for (let day = 0; day < 7; day++) {
-        const dataIndex = week * 7 + day;
-        const dayData = data[dataIndex];
-
-        if (dayData) {
-          const level = getIntensityLevel(dayData.count);
-          days.push(
-            <div
-              key={`${week}-${day}`}
-              className="w-[10px] h-[10px] rounded-sm transition-all hover:scale-110 cursor-pointer"
-              style={{
-                backgroundColor: getColor(level),
-                margin: "1.5px",
-              }}
-              title={`${dayData.date}: ${dayData.count} submissions`}
-            />
-          );
-        }
+        const idx = week * 7 + day;
+        const dayData = data[idx];
+        if (!dayData) continue;
+        const level = getIntensityLevel(dayData.count);
+        days.push(
+          <div
+            key={`${week}-${day}`}
+            className="w-[10px] h-[10px] rounded-sm transition-all hover:scale-110 cursor-pointer"
+            style={{ backgroundColor: getColor(level), margin: "1.5px" }}
+            title={`${dayData.date}: ${dayData.count} submissions`}
+          />
+        );
       }
-
       weeks.push(
         <div key={week} className="flex flex-col gap-0">
           {days}
         </div>
       );
     }
-
     return weeks;
   };
 

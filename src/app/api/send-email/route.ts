@@ -29,8 +29,8 @@ export async function POST(req: NextRequest) {
 
     // Send email using Resend
     const { error } = await resend.emails.send({
-      from: "Harsh <onboarding@resend.dev>",
-      to: ["harshshishodia08@gmail.com"],
+      from: "onboarding@resend.dev",
+      to: ["harshxshishodia@gmail.com"],
       subject: "Message from Your Portfolio",
       react: EmailTemplate({ Email: email, Message: message }),
     });

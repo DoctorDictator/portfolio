@@ -12,6 +12,24 @@ export const experienceData: I_Experience[] = [
 ];
 
 export const educationData: I_Education[] = [
+  // {
+  //   institute_link: "https://www.holyangelssbd.org/",
+  //   institute_logo: "/holyangels.png",
+  //   course_title: "Class X",
+  //   ending_date: "2022",
+  //   institute_name: "Holy Angels' Senior Secondary School Sahibabad",
+  //   cgpa: 94.3,
+  //   description: "",
+  // },
+  // {
+  //   institute_link: "https://davpssahibabad.org/",
+  //   institute_logo: "/davschool.png",
+  //   course_title: "Class XII",
+  //   ending_date: "2024",
+  //   institute_name: "DAV Public School, Sahibabad",
+  //   cgpa: 88,
+  //   description: "",
+  // },
   {
     institute_link: "https://jaipur.manipal.edu/",
     institute_logo: "/muj.png",

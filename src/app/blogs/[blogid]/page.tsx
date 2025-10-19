@@ -67,7 +67,7 @@ export async function generateStaticParams() {
     take: 20,
   });
 
-  return blogs.map((blog) => ({
+  return blogs.map((blog: { id: string }) => ({
     blogid: blog.id,
   }));
 }

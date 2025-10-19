@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "harsh",
     description: "",
-    url: "https://fardeen.tech",
+    url: "https://shishodia.vercel.app",
     siteName: "harsh",
     type: "website",
   },

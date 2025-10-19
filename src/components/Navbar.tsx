@@ -80,7 +80,7 @@ const Navbar = () => {
   const externalLinks: ExternalLink[] = useMemo(
     () => [
       {
-        href: "#", // TODO: Add actual resume link
+        href: "/resume", // TODO: Add actual resume link
         icon: <FileIcon className={iconSize} />,
         tooltip: "Resume",
         ariaLabel: "Download resume",

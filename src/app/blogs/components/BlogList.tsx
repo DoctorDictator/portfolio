@@ -1,7 +1,14 @@
 import { prisma } from "@/lib/prisma"; // adjust path if needed
 import BlogCard from "./BlogCard";
 
-export async function getBlogs() {
+type Blog = {
+  id: string;
+  title: string;
+  content: string;
+  createdAt: Date;
+};
+
+export async function getBlogs(): Promise<Blog[]> {
   try {
     const blogs = await prisma.blog.findMany({
       orderBy: { createdAt: "desc" },

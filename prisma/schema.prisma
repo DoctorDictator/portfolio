@@ -1,11 +1,12 @@
+
+
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("POSTGRES_PRISMA_URL")
-  directUrl = env("POSTGRES_URL_NON_POOLING")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Blog {
@@ -24,4 +25,12 @@ model User {
   hashedPassword String
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
+}
+model ResumeAccessRequest {
+  id         String   @id @default(cuid())
+  email      String
+  ip         String
+  status     String   @default("pending") // "pending", "approved", "denied"
+  createdAt  DateTime @default(now())
+  approvedAt DateTime?
 }

@@ -123,7 +123,7 @@ const data: I_About[] = [
     year: 2025,
     events: [
       "Got a GPA of 9.83 in my second semester.",
-      "Joined Harkirat Cohort 3.0 and completed its Web Development program.",
+      // "Joined Harkirat Cohort 3.0 and completed its Web Development program.",
       "Joined SDC, MUJ as a Web Developer Intern.",
     ],
   },
@@ -137,14 +137,16 @@ const data: I_About[] = [
   {
     year: 2024,
     events: [
-      "Completed my 12th grade with 88%, showcasing my dedication to academics.",
-      "Got a percentile of 93 in JEE Mains 2024, reflecting my strong aptitude in engineering concepts. But couldn't get into IIT.",
+      "Completed my 12th grade",
+      // "Completed my 12th grade with 88%, showcasing my dedication to academics.",
+      // "Got a percentile of 93 in JEE Mains 2024, reflecting my strong aptitude in engineering concepts. But couldn't get into IIT.",
     ],
   },
   {
     year: 2022,
     events: [
-      "Completed my 10th grade with 94.3%, marking a significant academic achievement.",
+      "Completed my 10th grade",
+      // "Completed my 10th grade with 94.3%, marking a significant academic achievement.",
     ],
   },
   {

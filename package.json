@@ -35,7 +35,7 @@
     "next-auth": "^4.24.10",
     "next-cloudinary": "^6.16.0",
     "next-themes": "^0.3.0",
-    "nodemailer": "^6.9.15",
+    "nodemailer": "^6.10.1",
     "react": "^18",
     "react-activity-calendar": "^2.7.1",
     "react-dom": "^18",

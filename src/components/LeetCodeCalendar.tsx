@@ -19,58 +19,6 @@ export default function LeetCodeCalendar({ username }: LeetCodeCalendarProps) {
   const [message, setMessage] = useState<string>("");
   const { isDarkMode } = useDarkMode();
 
-  useEffect(() => {
-    let cancelled = false;
-
-    async function fetchData() {
-      if (!username) return;
-
-      setLoading(true);
-      setMessage("");
-
-      try {
-        console.log(`Fetching real LeetCode data for: ${username}`);
-
-        const response = await fetch("/api/leetcode/calendar", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ username }),
-        });
-
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status}`);
-        }
-
-        const result = await response.json();
-        console.log("LeetCode API Response:", result);
-
-        if (!cancelled && Array.isArray(result.data)) {
-          setData(result.data);
-          setSource(result.source || "unknown");
-          setMessage(result.message || "");
-        }
-      } catch (error) {
-        console.error("Fetch error:", error);
-        if (!cancelled) {
-          const emptyData = generateEmptyData();
-          setData(emptyData);
-          setSource("error");
-          setMessage("Failed to load data");
-        }
-      } finally {
-        if (!cancelled) {
-          setLoading(false);
-        }
-      }
-    }
-
-    fetchData();
-
-    return () => {
-      cancelled = true;
-    };
-  }, [username]);
-
   const generateEmptyData = useCallback((): SubmissionData[] => {
     const out: SubmissionData[] = [];
     const today = new Date();
@@ -101,6 +49,54 @@ export default function LeetCodeCalendar({ username }: LeetCodeCalendarProps) {
     [isDarkMode]
   );
 
+  useEffect(() => {
+    let cancelled = false;
+
+    async function fetchData() {
+      if (!username) return;
+
+      setLoading(true);
+      setMessage("");
+
+      try {
+        const response = await fetch("/api/leetcode/calendar", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+
+        const result = await response.json();
+
+        if (!cancelled && Array.isArray(result.data)) {
+          setData(result.data);
+          setSource(result.source || "unknown");
+          setMessage(result.message || "");
+        }
+      } catch (error) {
+        console.error("Fetch error:", error);
+        if (!cancelled) {
+          const emptyData = generateEmptyData();
+          setData(emptyData);
+          setSource("error");
+          setMessage("Failed to load data");
+        }
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      }
+    }
+
+    fetchData();
+    return () => {
+      cancelled = true;
+    };
+  }, [username, generateEmptyData]); // include generateEmptyData to satisfy exhaustive-deps
+
   const weeks = useMemo(() => {
     const w: JSX.Element[] = [];
     const weeksCount = Math.ceil(data.length / 7);
@@ -111,7 +107,6 @@ export default function LeetCodeCalendar({ username }: LeetCodeCalendarProps) {
       for (let day = 0; day < 7; day++) {
         const idx = week * 7 + day;
         const dayData = data[idx];
-
         if (!dayData) continue;
 
         const level = getIntensityLevel(dayData.count);
