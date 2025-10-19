@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
     subject: "Resume Access Request",
     react: EmailTemplate({
       Email: email,
-      Message: `Resume access requested. Approve: https://localhost:3000/api/resume/approve/${request.id}`,
+      Message: `Resume access requested. Approve: https://shishodia.vercel.app/api/resume/approve/${request.id}`,
     }),
   });
 

@@ -24,5 +24,7 @@ export async function GET(
 
   // No email is sent here
 
-  return NextResponse.redirect(`http://localhost:3000/resume?token=${id}`);
+  return NextResponse.redirect(
+    `https://shishodia.vercel.app/resume?token=${id}`
+  );
 }
