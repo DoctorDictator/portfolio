@@ -18,8 +18,7 @@ export default function HeroSection() {
             className={`mt-2 max-sm:mt-5 max-sm:px-3 !text-base max-sm:!text-sm text-center !font-normal !tracking-normal inter !leading-6 ${inter}`}
           >
             19, i break things, learn fast, and make shit happen. deep into code
-            and cs; anything that pushes the limits. history, curiosity,
-            cricket, and great books shaped me. still chasing mastery.
+            and cs; anything that pushes the limits. still chasing mastery.
             <br />
             If you’re working on something real, let’s talk.
           </h1>
