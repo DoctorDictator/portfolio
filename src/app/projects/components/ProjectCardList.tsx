@@ -75,7 +75,7 @@ const data: Project[] = [
     logo: "/it-ticketing-system.png",
     title: "IT Ticketing System",
     description:
-      "An enterprise-grade helpdesk solution built for Manipal University Jaipur to streamline IT service requests. It features role-based dashboards (Admin, Supervisor, User), ticket lifecycle management, OTP-based authentication, email verification, and Microsoft SSO integration.",
+      "An enterprise-grade helpdesk solution built for Manipal University Jaipur to streamline IT service requests. It features role-based dashboards, ticket lifecycle management, OTP-based authentication, email verification, and Microsoft SSO integration.",
     techStack: [
       "Next.js 13+",
       "TypeScript",
