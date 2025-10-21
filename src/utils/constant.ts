@@ -6,7 +6,7 @@ export const experienceData: I_Experience[] = [
     company_logo: "/sdc.jpeg",
     company_name: "Software Development Center, Manipal University Jaipur",
     duration: "Aug 2025 - Present",
-    job_title: "Full Stack Development",
+    job_title: "Software Developer Intern",
     description: "",
   },
 ];
