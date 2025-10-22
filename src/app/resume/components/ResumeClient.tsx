@@ -13,7 +13,7 @@ export default function ResumeClient({ token }: { token: string | null }) {
   const [requestStatus, setRequestStatus] = useState<null | string>(null);
 
   // Google Docs Resume Info
-  const googleDocId = "1Cerwj5KEqGLdWvcRA3rzCzDd_96w9hi2";
+  const googleDocId = "1MiH3dno4P9aG_0wueZRBN9oxGcxC9Ywq";
   const embedUrl = `https://docs.google.com/document/d/${googleDocId}/preview`;
   const editUrl = `https://docs.google.com/document/d/${googleDocId}/edit`;
 
