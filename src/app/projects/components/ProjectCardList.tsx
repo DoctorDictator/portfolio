@@ -101,7 +101,7 @@ const data: Project[] = [
       "Tailwind CSS",
       "React",
     ],
-    link: "",
+    link: "https://rdbms-muj.vercel.app/",
     source: "https://github.com/DoctorDictator/rdbbms-project-2025",
   },
   {
