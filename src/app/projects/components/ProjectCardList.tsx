@@ -149,4 +149,21 @@ const data: Project[] = [
     link: "https://web-wallet-wheat.vercel.app",
     source: "https://github.com/DoctorDictator/web-wallet",
   },
+  {
+    logo: "",
+    title: "GTA-VI Landing Page",
+    description:
+      "A sleek, interactive landing page built using React + TypeScript + Vite and styled with Tailwind CSS, incorporating cinematic scroll-animations via GSAP ScrollTrigger. The site features pinned sections, video scrubbing tied to scroll position, and responsive layout—ideal for a high-impact promotional experience.",
+    techStack: [
+      "React", 
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS",
+      "GSAP",
+      "ScrollTrigger",
+    ],
+    link: "https://gta-vi-landing-page-phi.vercel.app",
+    source: "https://github.com/DoctorDictator/GTA-VI-landing-page",
+  },
+  
 ];
