@@ -153,7 +153,7 @@ const data: Project[] = [
     logo: "",
     title: "GTA-VI Landing Page",
     description:
-      "A sleek, interactive landing page built using React + TypeScript + Vite and styled with Tailwind CSS, incorporating cinematic scroll-animations via GSAP ScrollTrigger. The site features pinned sections, video scrubbing tied to scroll position, and responsive layout—ideal for a high-impact promotional experience.",
+      "A sleek, interactive landing page built with React, TypeScript, and Vite, styled using Tailwind CSS, and enhanced with GSAP ScrollTrigger for cinematic scroll-based animations, pinned sections, and scroll-synced video playback in a fully responsive layout.",
     techStack: [
       "React", 
       "TypeScript",
