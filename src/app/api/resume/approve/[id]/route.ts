@@ -5,6 +5,14 @@ export async function GET(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
+  if (!process.env.DATABASE_URL) {
+    console.warn("DATABASE_URL is missing. Cannot approve resume request.");
+    return NextResponse.json(
+      { success: false, message: "Database connection not configured." },
+      { status: 503 }
+    );
+  }
+
   const { id } = params;
   const request = await prisma.resumeAccessRequest.findUnique({
     where: { id },

@@ -20,6 +20,14 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  if (!process.env.DATABASE_URL) {
+    console.warn("DATABASE_URL is missing. Cannot create blog entry.");
+    return NextResponse.json(
+      { success: false, error: "Database connection not configured." },
+      { status: 503 }
+    );
+  }
+
   try {
     let title: string | null = null;
     let content: string | null = null;

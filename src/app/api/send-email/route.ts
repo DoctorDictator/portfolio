@@ -27,6 +27,17 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    if (!resend) {
+      console.warn("RESEND_API_KEY is missing. Skipping contact email send.");
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Email service is not configured. Please try again later.",
+        },
+        { status: 503 }
+      );
+    }
+
     // Send email using Resend
     const { error } = await resend.emails.send({
       from: "onboarding@resend.dev",

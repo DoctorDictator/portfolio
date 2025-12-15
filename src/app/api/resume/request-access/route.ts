@@ -14,10 +14,33 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  if (!process.env.DATABASE_URL) {
+    console.warn("DATABASE_URL is missing. Cannot record resume access request.");
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Database connection not configured. Please try again later.",
+      },
+      { status: 503 }
+    );
+  }
+
   // Store request in DB
   const request = await prisma.resumeAccessRequest.create({
     data: { email, ip },
   });
+
+  if (!resend) {
+    console.warn("RESEND_API_KEY is missing. Skipping email send.");
+    return NextResponse.json(
+      {
+        success: true,
+        message:
+          "Request saved, but email notification could not be sent (missing RESEND_API_KEY).",
+      },
+      { status: 200 }
+    );
+  }
 
   // Send email to you for approval
   await resend.emails.send({

@@ -9,6 +9,11 @@ type Blog = {
 };
 
 export async function getBlogs(): Promise<Blog[]> {
+  if (!process.env.DATABASE_URL) {
+    console.warn("DATABASE_URL is missing. Returning empty blog list.");
+    return [];
+  }
+
   try {
     const blogs = await prisma.blog.findMany({
       orderBy: { createdAt: "desc" },
