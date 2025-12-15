@@ -6,6 +6,14 @@ export async function GET(
   req: NextRequest,
   { params }: { params: { blogid: string } }
 ) {
+  if (!process.env.DATABASE_URL) {
+    console.warn("DATABASE_URL is missing. Cannot fetch blog entry.");
+    return NextResponse.json(
+      { success: false, message: "Database connection not configured." },
+      { status: 503 }
+    );
+  }
+
   const { blogid } = params;
 
   if (!blogid) {

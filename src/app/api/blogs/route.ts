@@ -2,6 +2,14 @@ import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
 export async function GET() {
+  if (!process.env.DATABASE_URL) {
+    console.warn("DATABASE_URL is missing. Cannot fetch blogs.");
+    return NextResponse.json(
+      { success: false, message: "Database connection not configured." },
+      { status: 503 }
+    );
+  }
+
   try {
     const blogs = await prisma.blog.findMany({
       orderBy: { createdAt: "desc" },

@@ -4,6 +4,11 @@ import { notFound } from 'next/navigation'
 const prisma = new PrismaClient();
 
 export async function getBlog(blogId: string) {
+    if (!process.env.DATABASE_URL) {
+        console.warn("DATABASE_URL is missing. Unable to fetch blog.");
+        notFound();
+    }
+
     try {
         const blog = await prisma.blog.findUnique({
             where: { id: blogId },

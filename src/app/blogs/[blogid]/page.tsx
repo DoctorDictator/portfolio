@@ -62,6 +62,11 @@ export default async function BlogDetailPage({ params }: PageProps) {
 }
 
 export async function generateStaticParams() {
+  if (!process.env.DATABASE_URL) {
+    console.warn("DATABASE_URL is missing. Skipping blog static param generation.");
+    return [];
+  }
+
   const blogs = await prisma.blog.findMany({
     select: { id: true },
     take: 20,

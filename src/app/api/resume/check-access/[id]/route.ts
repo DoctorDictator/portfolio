@@ -5,6 +5,11 @@ export async function GET(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
+  if (!process.env.DATABASE_URL) {
+    console.warn("DATABASE_URL is missing. Cannot verify resume access.");
+    return NextResponse.json({ allowed: false }, { status: 503 });
+  }
+
   const token = params.id;
   const email = req.nextUrl.searchParams.get("email");
   const ip = req.headers.get("x-forwarded-for") || req.ip || "unknown";
