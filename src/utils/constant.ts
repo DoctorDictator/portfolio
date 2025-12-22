@@ -36,7 +36,7 @@ export const educationData: I_Education[] = [
     course_title: "B.Tech Computer Science and Engineering",
     ending_date: "Expected July 2028",
     institute_name: "Manipal University Jaipur",
-    cgpa: 9.92,
+    cgpa: 9.93,
     description: "",
   },
 ];
